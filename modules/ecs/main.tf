@@ -4,29 +4,29 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 
 resource "aws_ecs_service" "test-service" {
   name            = "testapp-service"
-  cluster         = module.ecs.cluster_id
+  cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.test-def.arn
   desired_count   = var.app_count
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups  = [module.sg_ecs.sg_id]
+    security_groups  = [var.sg_ecs_id]
     subnets          = var.subnets_id_list
     assign_public_ip = true
   }
 
   load_balancer {
-    target_group_arn = module.alb.aws_target_group_arn
+    target_group_arn = var.alb_target_group_arn
     container_name   = "testapp"
     container_port   = var.app_port
   }
 
-  depends_on = [module.alb.aws_alb_listener, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  
 }
 
 resource "aws_ecs_task_definition" "test-def" {
   family                   = "testapp-task"
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = var.execution_role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu

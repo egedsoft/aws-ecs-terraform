@@ -3,6 +3,8 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
+data "aws_region" "current" {}
+
 module "sg_alb" {
   source = "./modules/sg"
 
@@ -47,7 +49,6 @@ module "alb" {
   vpc_id          = data.aws_vpc.selected.id
   sg_list_ids     = [module.sg_alb.sg_id]
   subnets_id_list = var.subnets_id_list
-
 }
 
 module "ecs" {
@@ -56,6 +57,14 @@ module "ecs" {
   app_count    = 2
   app_image    = "nginx:latest"
   app_port     = 80
+  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  fargate_memory = 2048
+  fargate_cpu= 1024
+  aws_region=data.aws_region.current.name
+  alb_target_group_arn= module.alb.aws_target_group_arn
+  depends_on = [module.alb.aws_alb_listener, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  sg_ecs_id=module.sg_ecs.sg_id
+  subnets_id_list=var.subnets_id_list
 }
 
 
