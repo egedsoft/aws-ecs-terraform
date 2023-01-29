@@ -30,8 +30,8 @@ module "sg_ecs" {
 
   vpc_id = data.aws_vpc.selected.id
 
-  ingress_app_port         = 80
-  ingress_protocol         = "tcp"
+  ingress_app_port        = 80
+  ingress_protocol        = "tcp"
   ingress_security_groups = [module.sg_alb.sg_id]
 
   egress_cidr_blocks_list = ["0.0.0.0/0"]
@@ -53,6 +53,9 @@ module "alb" {
 module "ecs" {
   source       = "./modules/ecs"
   cluster_name = "ecs1"
+  app_count    = 2
+  app_image    = "nginx:latest"
+  app_port     = 80
 }
 
 

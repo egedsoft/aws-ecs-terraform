@@ -55,7 +55,7 @@ variable "egress_protocol" {
 }
 
 variable "ingress_security_groups" {
-    description = "List of sg for ingress"
+  description = "List of sg for ingress"
   type        = list(string)
   default     = []
 }

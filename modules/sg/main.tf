@@ -4,10 +4,10 @@ resource "aws_security_group" "sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    protocol    = var.ingress_protocol
-    from_port   = var.ingress_app_port
-    to_port     = var.ingress_app_port
-    cidr_blocks = var.ingress_cidr_blocks_list
+    protocol        = var.ingress_protocol
+    from_port       = var.ingress_app_port
+    to_port         = var.ingress_app_port
+    cidr_blocks     = var.ingress_cidr_blocks_list
     security_groups = var.ingress_security_groups
   }
 
