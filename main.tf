@@ -56,18 +56,18 @@ module "ecs" {
 }
 
 
-resource "aws_ecs_service" "test-service" {
-  name            = "testapp-service"
-  cluster         = module.ecs.cluster_id
-  task_definition = aws_ecs_task_definition.test-def.arn
-  desired_count   = var.app_count
-  launch_type     = "FARGATE"
+# resource "aws_ecs_service" "test-service" {
+#   name            = "testapp-service"
+#   cluster         = module.ecs.cluster_id
+#   task_definition = aws_ecs_task_definition.test-def.arn
+#   desired_count   = var.app_count
+#   launch_type     = "FARGATE"
 
-  network_configuration {
-    security_groups  = [module.sg_ecs.sg_id]
-    subnets          = var.subnets_id_list
-    assign_public_ip = true
-  }
+#   network_configuration {
+#     security_groups  = [module.sg_ecs.sg_id]
+#     subnets          = var.subnets_id_list
+#     assign_public_ip = true
+#   }
 
 
 
