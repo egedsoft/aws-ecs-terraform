@@ -8,6 +8,7 @@ resource "aws_security_group" "sg" {
     from_port   = var.ingress_app_port
     to_port     = var.ingress_app_port
     cidr_blocks = var.ingress_cidr_blocks_list
+    security_groups = var.ingress_security_groups
   }
 
   egress {

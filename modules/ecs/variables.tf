@@ -4,14 +4,3 @@ variable "cluster_name" {
   default     = ""
 }
 
-variable "vpc_id" {
-  description = "id of exsisting vpc"
-  type        = string
-  default     = ""
-}
-
-variable "subnets_id_list" {
-  description = "List of subnets ids"
-  type        = list(string)
-  default     = []
-}
