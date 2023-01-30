@@ -54,6 +54,7 @@ module "alb" {
 module "ecs" {
   source       = "./modules/ecs"
   cluster_name = "ecs1"
+  service_name = "testapp-service"
   app_count    = 2
   app_image    = "nginx:latest"
   app_port     = 80
@@ -99,20 +100,50 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
 }
 
 
+#######################################################
 
 
+resource "aws_appautoscaling_target" "ecs_target" {
+  max_capacity       = 4
+  min_capacity       = 2
+  resource_id        = "service/${module.ecs.cluster_name}/${module.ecs.service_name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+#Automatically scale capacity up by one
+resource "aws_appautoscaling_policy" "ecs_policy_up" {
+  name               = "scale-down"
+  policy_type        = "StepScaling"
+  resource_id        = "service/${module.ecs.cluster_name}/${module.ecs.service_name}"
+  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Maximum"
+
+    step_adjustment {
+      metric_interval_upper_bound = 0
+      scaling_adjustment          = -1
+    }
+  }
+}
 
 
+# Set up CloudWatch group and log stream and retain logs for 30 days
+resource "aws_cloudwatch_log_group" "testapp_log_group" {
+  name              = "/ecs/testapp"
+  retention_in_days = 30
 
+  tags = {
+    Name = "cw-log-group"
+  }
+}
 
-#   load_balancer {
-#     target_group_arn = module.alb.aws_target_group_arn
-#     container_name   = "testapp"
-#     container_port   = var.app_port
-#   }
-
-#   depends_on = [module.alb.aws_alb_listener] #aws_iam_role_policy_attachment.ecs_task_execution_role
-# }
-
-
+resource "aws_cloudwatch_log_stream" "myapp_log_stream" {
+  name           = "test-log-stream"
+  log_group_name = aws_cloudwatch_log_group.testapp_log_group.name
+}
 
