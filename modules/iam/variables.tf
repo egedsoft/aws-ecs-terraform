@@ -1,4 +1,4 @@
 variable "ecs_task_execution_role" {
-  default     = "myECcsTaskExecutionRole"
+  default     = ""
   description = "ECS task execution role name"
 }

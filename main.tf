@@ -53,6 +53,8 @@ module "alb" {
 
 module "iam" {
   source = "./modules/iam"
+
+  ecs_task_execution_role=var.ecs_task_execution_role
 }
 
 module "ecs" {
