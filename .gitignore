@@ -1,4 +1,4 @@
 /.terraform
 /.terraform.lock.hcl
 **/*.tfvars*
-vars.tfvars
+/vars.tfvars
