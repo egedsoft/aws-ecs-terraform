@@ -1,6 +1,6 @@
 [
   {
-    "name": "${app_name}",
+    "name": "${var.app_name}-container",
     "image": "${app_image}",
     "cpu": ${fargate_cpu},
     "memory": ${fargate_memory},
