@@ -63,8 +63,8 @@ module "ecs" {
   app_image            = "nginx:latest"
   app_port             = 80
   execution_role_arn   = module.iam.ecs_task_execution_role_arn
-  fargate_memory       = 512
-  fargate_cpu          = 256
+  fargate_memory       = var.fargate_cpu
+  fargate_cpu          = var.fargate_memory
   aws_region           = data.aws_region.current.name
   alb_target_group_arn = module.alb.aws_target_group_arn
   sg_ecs_id            = module.sg_ecs.sg_id

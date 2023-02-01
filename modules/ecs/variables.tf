@@ -17,13 +17,11 @@ variable "aws_region" {
 
 variable "fargate_cpu" {
   type        = number
-  default     = 1024
   description = "fargate instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
 variable "fargate_memory" {
   type        = number
-  default     = 1024
   description = "Fargate instance memory to provision (in MiB) not MB"
 }
 
