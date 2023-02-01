@@ -21,3 +21,5 @@ variable "subnets_id_list" {
   type        = list(string)
   default     = []
 }
+
+variable "ingress_app_port" {}

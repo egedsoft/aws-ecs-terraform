@@ -1,6 +1,4 @@
-# variable "backend_bucket" {}
-# variable "backend_key" {}
-# variable "backend_region" {}
+
 
 
 

@@ -48,6 +48,7 @@ module "alb" {
   subnets_id_list   = var.subnets_id_list
   app_name          = var.app_name
   health_check_path = var.health_check_path
+  ingress_app_port  = var.ingress_app_port
 
 }
 
@@ -71,6 +72,7 @@ module "ecs" {
   alb_target_group_arn = module.alb.aws_target_group_arn
   sg_ecs_id            = module.sg_ecs.sg_id
   subnets_id_list      = var.subnets_id_list
+  app_name             = var.app_name
   depends_on           = [module.alb.aws_alb_listener, module.iam]
 
 }
