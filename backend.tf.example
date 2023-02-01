@@ -1,0 +1,9 @@
+terraform {
+  backend "s3" {
+    bucket = "xxx-terraform-state1"
+    key    = "xxx/test.tfstate"
+    region = "eu-west-1"
+  }
+}
+
+

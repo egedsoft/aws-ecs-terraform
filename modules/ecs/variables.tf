@@ -65,3 +65,6 @@ variable "service_name" {
   default     = ""
   description = "description"
 }
+
+
+variable "app_name" {}

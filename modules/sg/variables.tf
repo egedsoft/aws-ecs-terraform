@@ -20,7 +20,6 @@ variable "vpc_id" {
 variable "ingress_app_port" {
   description = "Port of the application"
   type        = number
-  default     = 0
 }
 
 variable "ingress_cidr_blocks_list" {

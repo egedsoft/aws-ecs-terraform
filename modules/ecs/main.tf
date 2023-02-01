@@ -17,7 +17,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   load_balancer {
     target_group_arn = var.alb_target_group_arn
-    container_name   = "testapp"
+    container_name   = "${var.app_name}-container"
     container_port   = var.app_port
   }
 
@@ -25,7 +25,7 @@ resource "aws_ecs_service" "ecs_service" {
 }
 
 resource "aws_ecs_task_definition" "test-def" {
-  family                   = "testapp-task"
+  family                   = "${var.app_name}-task"
   execution_role_arn       = var.execution_role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -44,5 +44,6 @@ data "template_file" "testapp" {
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
     aws_region     = var.aws_region
+    app_name= var.app_name
   }
 }
