@@ -43,3 +43,8 @@ variable "app_count" {
   description = "numer of docker containers to run"
 }
 
+variable "ecs_task_execution_role" {
+  type        = string
+  default     = ""
+  description = "ECS task execution role name"
+}

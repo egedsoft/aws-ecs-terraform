@@ -13,8 +13,8 @@ module "sg_alb" {
 
   vpc_id = data.aws_vpc.selected.id
 
-  ingress_cidr_blocks_list = ["0.0.0.0/0"]
-  ingress_app_port         = 80
+  ingress_cidr_blocks_list = var.ingress_cidr_blocks_list
+  ingress_app_port         = var.ingress_app_port
   ingress_protocol         = "tcp"
 
   egress_cidr_blocks_list = ["0.0.0.0/0"]
@@ -54,7 +54,7 @@ module "alb" {
 module "iam" {
   source = "./modules/iam"
 
-  ecs_task_execution_role=var.ecs_task_execution_role
+  ecs_task_execution_role = var.ecs_task_execution_role
 }
 
 module "ecs" {
