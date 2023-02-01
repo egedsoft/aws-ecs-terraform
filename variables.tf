@@ -43,8 +43,6 @@ variable "ecs_task_execution_role" {
   description = "ECS task execution role name"
 }
 
-
-
 variable "ingress_app_port" {
   description = "Port of the application"
   type        = number
