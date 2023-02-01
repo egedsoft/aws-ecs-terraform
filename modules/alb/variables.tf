@@ -5,7 +5,7 @@ variable "vpc_id" {
 }
 
 variable "app_name" {
-  default = "nginx"
+  default = ""
 }
 
 variable "health_check_path" {

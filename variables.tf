@@ -7,11 +7,20 @@ variable "vpc_id" {
 variable "subnets_id_list" {
   description = "id of exsisting subnets"
   type        = list(string)
-  default = [
-    "subnet-044da566f786ff9d8",
-    "subnet-0d6798ff335801c6d",
-    "subnet-0ea06995e19b2eebb"
-  ]
+  default     = []
 }
+
+variable "app_name" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "health_check_path" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
 
 

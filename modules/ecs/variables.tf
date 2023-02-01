@@ -16,13 +16,13 @@ variable "aws_region" {
 }
 
 variable "fargate_cpu" {
-  type = number
+  type        = number
   default     = 1024
   description = "fargate instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
 variable "fargate_memory" {
-  type = number
+  type        = number
   default     = 1024
   description = "Fargate instance memory to provision (in MiB) not MB"
 }
@@ -60,7 +60,7 @@ variable "sg_ecs_id" {
 variable "subnets_id_list" {
   description = "id of exsisting subnets"
   type        = list(string)
-  default = []
+  default     = []
 }
 
 variable "service_name" {

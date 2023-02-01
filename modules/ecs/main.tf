@@ -21,7 +21,7 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = var.app_port
   }
 
-  
+
 }
 
 resource "aws_ecs_task_definition" "test-def" {

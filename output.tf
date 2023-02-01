@@ -1,3 +1,3 @@
-output name {
-  value       = module.alb.dns_name
+output "name" {
+  value = module.alb.dns_name
 }

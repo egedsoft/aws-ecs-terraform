@@ -42,42 +42,45 @@ module "sg_ecs" {
 }
 
 module "alb" {
-  source          = "./modules/alb"
-  vpc_id          = data.aws_vpc.selected.id
-  sg_list_ids     = [module.sg_alb.sg_id]
-  subnets_id_list = var.subnets_id_list
+  source            = "./modules/alb"
+  vpc_id            = data.aws_vpc.selected.id
+  sg_list_ids       = [module.sg_alb.sg_id]
+  subnets_id_list   = var.subnets_id_list
+  app_name          = var.app_name
+  health_check_path = var.health_check_path
+
 }
 
 module "iam" {
-  source          = "./modules/iam"
+  source = "./modules/iam"
 }
 
 module "ecs" {
-  source       = "./modules/ecs"
-  cluster_name = "ecs1"
-  service_name = "testapp-service"
-  app_count    = 2
-  app_image    = "nginx:latest"
-  app_port     = 80
-  execution_role_arn = module.iam.ecs_task_execution_role_arn
-  fargate_memory = 512
-  fargate_cpu= 256
-  aws_region=data.aws_region.current.name
-  alb_target_group_arn= module.alb.aws_target_group_arn
-  sg_ecs_id=module.sg_ecs.sg_id
-  subnets_id_list=var.subnets_id_list
-  depends_on = [module.alb.aws_alb_listener, module.iam]
+  source               = "./modules/ecs"
+  cluster_name         = "ecs1"
+  service_name         = "testapp-service"
+  app_count            = 2
+  app_image            = "nginx:latest"
+  app_port             = 80
+  execution_role_arn   = module.iam.ecs_task_execution_role_arn
+  fargate_memory       = 512
+  fargate_cpu          = 256
+  aws_region           = data.aws_region.current.name
+  alb_target_group_arn = module.alb.aws_target_group_arn
+  sg_ecs_id            = module.sg_ecs.sg_id
+  subnets_id_list      = var.subnets_id_list
+  depends_on           = [module.alb.aws_alb_listener, module.iam]
 
 }
 
 module "autoscale" {
-  source          = "./modules/autoscale"
-  ecs_cluster_name=module.ecs.cluster_name
-  ecs_service_name=module.ecs.service_name
+  source           = "./modules/autoscale"
+  ecs_cluster_name = module.ecs.cluster_name
+  ecs_service_name = module.ecs.service_name
 }
 
 module "cloudwatch" {
-  source          = "./modules/cloudwatch"
+  source = "./modules/cloudwatch"
 }
 
 
