@@ -85,6 +85,7 @@ module "autoscale" {
 
 module "cloudwatch" {
   source = "./modules/cloudwatch"
+  log_group_name="${var.app_name}-container"
 }
 
 
