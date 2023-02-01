@@ -1,3 +1,9 @@
+variable "backend_bucket" {}
+variable "backend_key" {}
+variable "backend_region" {}
+
+
+
 variable "vpc_id" {
   description = "id of exsisting vpc"
   type        = string
@@ -21,6 +27,8 @@ variable "health_check_path" {
   type        = string
   default     = ""
 }
+
+
 
 
 
