@@ -12,7 +12,7 @@ resource "aws_alb" "alb" {
 resource "aws_alb_target_group" "app-tg" {
   name        = "${var.app_name}-tg"
   vpc_id      = var.vpc_id
-  port        = 80
+  port        = var.ingress_app_port
   protocol    = "HTTP"
   target_type = "ip"
 
@@ -31,7 +31,7 @@ resource "aws_alb_target_group" "app-tg" {
 #redirecting all incomming traffic from ALB to the target group
 resource "aws_alb_listener" "testapp" {
   load_balancer_arn = aws_alb.alb.id
-  port              = 80
+  port              = var.ingress_app_port
   protocol          = "HTTP"
   #ssl_policy        = "ELBSecurityPolicy-2016-08"
   #certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
