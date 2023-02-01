@@ -1,7 +1,3 @@
-
-
-
-
 variable "vpc_id" {
   description = "id of exsisting vpc"
   type        = string
