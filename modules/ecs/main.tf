@@ -44,5 +44,6 @@ data "template_file" "testapp" {
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
     aws_region     = var.aws_region
+    app_name= var.app_name
   }
 }
