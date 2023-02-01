@@ -5,3 +5,5 @@ subnets_id_list = [
   "subnet-0d6798ff335801c6d",
   "subnet-0ea06995e19b2eebb"
 ]
+
+app-name = "nginx"
