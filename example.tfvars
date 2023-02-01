@@ -1,7 +1,3 @@
-bucket = "xxx-terraform-state1"
-key    = "xxx/test.tfstate"
-region = "eu-west-1"
-
 vpc_id                   = "vpc-xxx"
 ingress_cidr_blocks_list = ["0.0.0.0/0"]
 egress_cidr_blocks_list  = ["0.0.0.0/0"]
