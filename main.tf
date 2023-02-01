@@ -59,12 +59,12 @@ module "ecs" {
   source               = "./modules/ecs"
   cluster_name         = "ecs1"
   service_name         = "testapp-service"
-  app_count            = 2
+  app_count            = var.app_count
   app_image            = "nginx:latest"
   app_port             = 80
   execution_role_arn   = module.iam.ecs_task_execution_role_arn
-  fargate_memory       = var.fargate_cpu
-  fargate_cpu          = var.fargate_memory
+  fargate_memory       = var.fargate_memory
+  fargate_cpu          = var.fargate_cpu
   aws_region           = data.aws_region.current.name
   alb_target_group_arn = module.alb.aws_target_group_arn
   sg_ecs_id            = module.sg_ecs.sg_id

@@ -9,7 +9,7 @@ variable "app_name" {
 }
 
 variable "health_check_path" {
-  default = "/"
+  default = ""
 }
 
 variable "sg_list_ids" {

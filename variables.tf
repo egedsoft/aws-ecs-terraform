@@ -38,5 +38,8 @@ variable "fargate_memory" {
   description = "Fargate instance memory to provision (in MiB) not MB"
 }
 
-
+variable "app_count" {
+  type        = number
+  description = "numer of docker containers to run"
+}
 
