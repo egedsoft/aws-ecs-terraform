@@ -27,3 +27,6 @@ Answer 1: This **Terraform** code creates an Amazon Web Services (AWS) infrastru
 - The ecs module creates an ECS cluster and service. The configurations include the cluster and service name, the number of application containers, the application image, the application port, the execution role ARN, and the Fargate resource requirements. The autoscale module creates an auto-scaling group for the ECS cluster.
 
 - The cloudwatch module creates an **Amazon CloudWatch**.
+
+## Contributing Guidelines   
+Thanks for considering contributing to this project! To ensure a smooth and efficient process for both contributors and maintainers, please follow the [guidelines](CONTRIBUTING.md).
